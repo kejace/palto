@@ -3,17 +3,17 @@ module Test.Main where
 import Control.Monad.Eff
 import Control.Monad.Eff.Console
 
-import Prelude hiding (add, mul, compare)
+import Prelude hiding
 
 import Palto
 
 expr :: forall repr. (Expr repr) =>
     repr Int
-expr = int 90
+expr = pint 90
 
 expr' :: forall repr. (Mult repr, Expr repr) =>
     repr Boolean
-expr' = int 90 `compare` (int 3 `mul` (int 10 `add` int 20))
+expr' = pint 90 `pcompare` (pint 3 `pmul` (pint 10 `padd` pint 20))
 
 main :: forall e. Eff (console :: CONSOLE | e) Unit
 main = do

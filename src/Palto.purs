@@ -5,14 +5,14 @@ module Palto
     , Mult
     , runStringify
     , runEval
-    , int
-    , boolean
-    , add
-    , compare
-    , mul
+    , pint
+    , pboolean
+    , padd
+    , pcompare
+    , pmul
     ) where
 
-import Prelude hiding (add, mul, compare)
+import Prelude hiding
 
 data Eval ret = Eval ret
 
@@ -25,32 +25,32 @@ runStringify :: forall a. (Show a) => Stringify a -> String
 runStringify (Stringify ret) = ret
 
 class Expr repr where
-    int :: Int -> repr Int
-    boolean :: Boolean -> repr Boolean
-    add :: repr Int -> repr Int -> repr Int
-    compare :: forall a. (Eq a) =>
+    pint :: Int -> repr Int
+    pboolean :: Boolean -> repr Boolean
+    padd :: repr Int -> repr Int -> repr Int
+    pcompare :: forall a. (Eq a) =>
                repr a -> repr a -> repr Boolean
 
 instance exprEval :: Expr Eval where
-    int = Eval
-    boolean = Eval
-    add (Eval l) (Eval r) = Eval $ l + r
-    compare (Eval l) (Eval r) = Eval $ l == r
+    pint = Eval
+    pboolean = Eval
+    padd (Eval l) (Eval r) = Eval $ l + r
+    pcompare (Eval l) (Eval r) = Eval $ l == r
 
 instance exprStringify :: Expr Stringify where
-    int = Stringify <<< show
-    boolean = Stringify <<< show
-    add (Stringify l) (Stringify r) =
+    pint = Stringify <<< show
+    pboolean = Stringify <<< show
+    padd (Stringify l) (Stringify r) =
         Stringify $ "(" ++ l ++ " + " ++ r ++ ")"
-    compare (Stringify l) (Stringify r) = 
+    pcompare (Stringify l) (Stringify r) = 
         Stringify $ "(" ++ l ++ " == " ++ r ++ ")"
 
 class Mult repr where
-    mul :: repr Int -> repr Int -> repr Int
+    pmul :: repr Int -> repr Int -> repr Int
 
 instance multEval :: Mult Eval where
-    mul (Eval l) (Eval r) = Eval $ l * r
+    pmul (Eval l) (Eval r) = Eval $ l * r
 
 instance multStringify :: Mult Stringify where
-    mul (Stringify l) (Stringify r) = 
+    pmul (Stringify l) (Stringify r) = 
         Stringify $ "(" ++ l ++ " * " ++ r ++ ")"
