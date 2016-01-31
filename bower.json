@@ -1,9 +1,6 @@
 {
   "name": "palto",
   "version": "1.0.0",
-  "moduleType": [
-    "node"
-  ],
   "main": "src/Main.hs",
   "ignore": [
     "**/.*",
