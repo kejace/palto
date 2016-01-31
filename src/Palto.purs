@@ -1,6 +1,16 @@
-module Palto (Eval(..), Stringify(..), Expr, Mult, runStringify, runEval, int, boolean, add, compare, mul)
-
-	where
+module Palto 
+    ( Eval(..)
+    , Stringify(..)
+    , Expr
+    , Mult
+    , runStringify
+    , runEval
+    , int
+    , boolean
+    , add
+    , compare
+    , mul
+    ) where
 
 import Prelude hiding (add, mul, compare)
 
