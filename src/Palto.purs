@@ -25,9 +25,9 @@ runStringify :: forall a. (Show a) => Stringify a -> String
 runStringify (Stringify ret) = ret
 
 class Expr repr where
-    pint :: Int -> repr Int
+    pint :: Number -> repr Number
     pboolean :: Boolean -> repr Boolean
-    padd :: repr Int -> repr Int -> repr Int
+    padd :: repr Number -> repr Number -> repr Number
     pcompare :: forall a. (Eq a) =>
                repr a -> repr a -> repr Boolean
 
@@ -46,7 +46,7 @@ instance exprStringify :: Expr Stringify where
         Stringify $ "(" ++ l ++ " == " ++ r ++ ")"
 
 class Mult repr where
-    pmul :: repr Int -> repr Int -> repr Int
+    pmul :: repr Number -> repr Number -> repr Number
 
 instance multEval :: Mult Eval where
     pmul (Eval l) (Eval r) = Eval $ l * r
