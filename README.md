@@ -1,1 +1,1 @@
-# palto
+# purescript-palto
