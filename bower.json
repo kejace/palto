@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kejace/palto.git"
+    "url": "git://github.com/kejace/purescript-palto.git"
   },
   "dependencies": {
     "purescript-console": "^0.1.0"
