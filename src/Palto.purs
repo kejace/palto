@@ -1,8 +1,8 @@
 module Palto 
     ( Eval(..)
     , Stringify(..)
-    , Expr
-    , Mult
+    , class Expr
+    , class Mult
     , runStringify
     , runEval
     , pint
@@ -12,7 +12,7 @@ module Palto
     , pmul
     ) where
 
-import Prelude hiding
+import Prelude 
 
 data Eval ret = Eval ret
 
@@ -41,9 +41,9 @@ instance exprStringify :: Expr Stringify where
     pint = Stringify <<< show
     pboolean = Stringify <<< show
     padd (Stringify l) (Stringify r) =
-        Stringify $ "(" ++ l ++ " + " ++ r ++ ")"
+        Stringify $ "(" <> l <> " + " <> r <> ")"
     pcompare (Stringify l) (Stringify r) = 
-        Stringify $ "(" ++ l ++ " == " ++ r ++ ")"
+        Stringify $ "(" <> l <> " == " <> r <> ")"
 
 class Mult repr where
     pmul :: repr Number -> repr Number -> repr Number
@@ -53,4 +53,4 @@ instance multEval :: Mult Eval where
 
 instance multStringify :: Mult Stringify where
     pmul (Stringify l) (Stringify r) = 
-        Stringify $ "(" ++ l ++ " * " ++ r ++ ")"
+        Stringify $ "(" <> l <> " * " <> r <> ")"
